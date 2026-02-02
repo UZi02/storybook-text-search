@@ -13,7 +13,6 @@ interface GenerateDocsOptions {
 export async function generateDocs({ config, rootDir }: GenerateDocsOptions): Promise<SearchDoc[]> {
     const inputPaths = config.inputPaths;
     const files = await FastGlob(inputPaths, {
-        cwd: rootDir,
         onlyFiles: true,
         extglob: true,
         unique: true,
@@ -40,7 +39,7 @@ export async function generateDocs({ config, rootDir }: GenerateDocsOptions): Pr
             const relativePath = path.relative(rootDir, fullPath);
             const fileName = path.basename(fullPath).replace(/\.[^/.]+$/, '');
             const baseDocsNavUrl: string = '/?path=/docs';
-            const formattedDocSlug = metaTitle.toLowerCase().replace(/^\//, '').replace(/[\/\s_]+/g, '-');
+            const formattedDocSlug = metaTitle?.toLowerCase().replace(/^\//, '').replaceAll(/[/\s_]+/g, '-');
             const docHref = config.pathPrefix && config.pathPrefix.length > 0
                 ? `${baseDocsNavUrl}/${config.pathPrefix}/${formattedDocSlug}`
                 : `${baseDocsNavUrl}/${formattedDocSlug}`;
@@ -50,7 +49,7 @@ export async function generateDocs({ config, rootDir }: GenerateDocsOptions): Pr
                 title: fileName,
                 content,
                 docHref,
-                snippet: content.slice(0, 150).replace(/\s+/g, " ") + "…",
+                snippet: content.slice(0, 150).replaceAll(/\s+/g, " ") + "…",
                 sourcePath: fullPath,
                 metaTitle,
                 type: "mdx"
