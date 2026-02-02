@@ -1,5 +1,5 @@
 import FastGlob from 'fast-glob';
-import path from 'path';
+import path from 'node:path';
 import { extractTextFromMdx } from 'src/utils/extract/extractFromMdx';
 // import { extractComponentMetadata } from 'src/utils/extract/extractComponentMetadata';
 import type { SearchDoc } from '../scripts/buildTextIndex';

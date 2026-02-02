@@ -8,12 +8,16 @@
     "isolatedModules": true,
     "jsx": "react",
     "lib": ["es2020", "dom"],
-    "module": "commonjs",
+    "module": "es2020",
     "target": "ES2020",
     "noImplicitAny": true,
     "typeRoots": ["./node_modules/@types"],
     "rootDir": "./src",
     "skipLibCheck": true,
+    "moduleResolution": "bundler",
+    "paths": {
+      "src/*": ["src/*"]
+    },
   },
   "include": ["src/**/*", ".storybook-text-search/custom-extractors"]
 }

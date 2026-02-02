@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 
-import path from 'path';
-import fs from 'fs/promises';
+import path from 'node:path';
+import fs from 'node:fs/promises';
 import { generateDocs } from '../utils/generateDocs';
 import MiniSearch from 'minisearch';
 import { TextSearchConfig } from 'src/types';
-import { pathToFileURL } from 'url';
+import { pathToFileURL } from 'node:url';
 
 
 export interface SearchDoc {
