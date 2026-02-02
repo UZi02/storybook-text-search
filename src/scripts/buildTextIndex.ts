@@ -38,9 +38,9 @@ export async function buildTextIndex() {
     const config: TextSearchConfig = (await import(configUrl)).default;
 
     if (Array.isArray(config.inputPaths)) {
-        config.inputPaths = config.inputPaths.map(p => path.resolve(toolDirPath, p));
+        config.inputPaths = config.inputPaths.map(p => path.resolve(toolDirPath, p).replaceAll('\\', '/'));
     } else {
-        throw new Error("❌ config.inputPaths must be an array of string(s). If using a single path, please place it in an array");
+        throw new TypeError("❌ config.inputPaths must be an array of string(s). If using a single path, please place it in an array");
     }
 
     const docs: SearchDoc[] = await generateDocs({ config: config, rootDir: toolDirPath });
